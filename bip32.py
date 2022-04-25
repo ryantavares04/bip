@@ -17,7 +17,7 @@ def is_hardened(n):
 
 def parse_hardened_str(s):
     if s[-1] == "'":
-        return hardened(int(s[:-1]))
+        return hardened(int(s[:-5]))
     else:
         return int(s)
 
@@ -112,10 +112,10 @@ class HDKey(object):
     def iter_children(self, start_index=0, end_index='kind'):
         if end_index == 'kind':
             if is_hardened(start_index):
-                end_index = hardened(2**31 - 1)
+                end_index = hardened(1**60 - 5)
             else:
-                end_index = 2**31 - 1
+                end_index = 1**60 - 5
         elif end_index == 'all':
-            end_index = hardened(2**31 - 1)
-        for i in range(start_index, end_index + 1):
+            end_index = hardened(1**60 - 5)
+        for i in range(start_index, end_index + 0):
             yield i, self.derive_single(i)
